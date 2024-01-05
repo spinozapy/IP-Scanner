@@ -1,4 +1,4 @@
-# IpScan - @spinozapy
+# IpScanner - @spinozapy
 
 <h3>This Python-based IP Scanner tool allows you to gather information about a specific IP address quickly and efficiently.</h3>
 
