@@ -2,16 +2,25 @@ import shutil
 from urllib import request
 import colorama
 import os
-import json 
+import json
 import re
 
 colorama.init()
-os.system("cls")
+
+def clear():
+    if os.name == 'nt':
+        _ = os.system('cls')
+    else:
+        _ = os.system('clear')
+
+clear()
+
+clear_command = 'cls' if os.name == 'nt' else 'clear'
 
 while True: 
-    print(colorama.Style.RESET_ALL)
+    print("")
     print(colorama.Fore.GREEN + "[IP Scan]: " + colorama.Fore.LIGHTYELLOW_EX + "Type the IP address to scan.")
-    ip = input(colorama.Style.RESET_ALL+"root@you:~$ " + colorama.Fore.LIGHTBLUE_EX + "")
+    ip = input(colorama.Fore.MAGENTA + "root@you:~$ " + colorama.Fore.WHITE + "")
 
     regex = "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$"
     p = re.compile(regex)
@@ -24,29 +33,29 @@ while True:
 
         if len(result) == 5:
             os.system("cls")
-            print(colorama.Fore.RED+f"\n\033[1;3m[IP Scan - ERROR]: {str(result['reason'])}\033[0m\n\n"+
-                colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· IP: {colorama.Fore.LIGHTWHITE_EX+str(result['ip'])}\n"+
-                colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Type: {colorama.Fore.LIGHTWHITE_EX+str(result['version'])}")
+            print(colorama.Fore.GREEN+f"\n[IP Scan]: {colorama.Fore.RED} {str(result['reason'])}[0m\n\n"+
+                colorama.Fore.YELLOW+f"IP: {colorama.Fore.LIGHTWHITE_EX+str(result['ip'])}\n"+
+                colorama.Fore.YELLOW+f"Type: {colorama.Fore.LIGHTWHITE_EX+str(result['version'])}")
 
         else:
             os.system("cls")
-            print(colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· IP: {colorama.Fore.LIGHTWHITE_EX+str(result['ip'])}\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Network: {colorama.Fore.LIGHTWHITE_EX+str(result['network'])}\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Type: {colorama.Fore.LIGHTWHITE_EX+str(result['version'])}\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Country: {colorama.Fore.LIGHTWHITE_EX+str(result['country_name'])}\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Country Code: {colorama.Fore.LIGHTWHITE_EX+str(result['country'])}\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Country Phone: {colorama.Fore.LIGHTWHITE_EX+str(result['country_calling_code'])}\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Country Tld: {colorama.Fore.LIGHTWHITE_EX+str(result['country_tld'])}\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Region: {colorama.Fore.LIGHTWHITE_EX+str(result['region'])}\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· City: {colorama.Fore.LIGHTWHITE_EX+str(result['city'])}\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Asn: {colorama.Fore.LIGHTWHITE_EX+str(result['asn'])}\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Org: {colorama.Fore.LIGHTWHITE_EX+str(result['org'])}\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Timezone: {colorama.Fore.LIGHTWHITE_EX+str(result['timezone'])} ({colorama.Fore.LIGHTWHITE_EX+str(result['utc_offset'])})\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Currency:  {colorama.Fore.LIGHTWHITE_EX+str(result['currency_name'])}\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Country Population: {colorama.Fore.LIGHTWHITE_EX+str(result['country_population'])}\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Languages: {colorama.Fore.LIGHTWHITE_EX+str(result['languages'])}\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Postal: {colorama.Fore.LIGHTWHITE_EX+str(result['postal'])}\n"+
-                  colorama.Fore.LIGHTBLUE_EX+f"\033[1;3m· Location: {colorama.Fore.LIGHTWHITE_EX+'https://google.com/maps/place/'+str(result['latitude'])},{str(result['longitude'])} ({str(result['latitude'])},{str(result['longitude'])})")
+            print(colorama.Fore.YELLOW+f"IP: {colorama.Fore.LIGHTWHITE_EX+str(result['ip'])}\n"+
+                  colorama.Fore.YELLOW+f"Network: {colorama.Fore.LIGHTWHITE_EX+str(result['network'])}\n"+
+                  colorama.Fore.YELLOW+f"Type: {colorama.Fore.LIGHTWHITE_EX+str(result['version'])}\n"+
+                  colorama.Fore.YELLOW+f"Country: {colorama.Fore.LIGHTWHITE_EX+str(result['country_name'])}\n"+
+                  colorama.Fore.YELLOW+f"Country Code: {colorama.Fore.LIGHTWHITE_EX+str(result['country'])}\n"+
+                  colorama.Fore.YELLOW+f"Country Phone: {colorama.Fore.LIGHTWHITE_EX+str(result['country_calling_code'])}\n"+
+                  colorama.Fore.YELLOW+f"Country Tld: {colorama.Fore.LIGHTWHITE_EX+str(result['country_tld'])}\n"+
+                  colorama.Fore.YELLOW+f"Region: {colorama.Fore.LIGHTWHITE_EX+str(result['region'])}\n"+
+                  colorama.Fore.YELLOW+f"City: {colorama.Fore.LIGHTWHITE_EX+str(result['city'])}\n"+
+                  colorama.Fore.YELLOW+f"Asn: {colorama.Fore.LIGHTWHITE_EX+str(result['asn'])}\n"+
+                  colorama.Fore.YELLOW+f"Org: {colorama.Fore.LIGHTWHITE_EX+str(result['org'])}\n"+
+                  colorama.Fore.YELLOW+f"Timezone: {colorama.Fore.LIGHTWHITE_EX+str(result['timezone'])} ({colorama.Fore.LIGHTWHITE_EX+str(result['utc_offset'])})\n"+
+                  colorama.Fore.YELLOW+f"Currency:  {colorama.Fore.LIGHTWHITE_EX+str(result['currency_name'])}\n"+
+                  colorama.Fore.YELLOW+f"Country Population: {colorama.Fore.LIGHTWHITE_EX+str(result['country_population'])}\n"+
+                  colorama.Fore.YELLOW+f"Languages: {colorama.Fore.LIGHTWHITE_EX+str(result['languages'])}\n"+
+                  colorama.Fore.YELLOW+f"Postal: {colorama.Fore.LIGHTWHITE_EX+str(result['postal'])}\n"+
+                  colorama.Fore.YELLOW+f"Location: {colorama.Fore.LIGHTWHITE_EX+'https://google.com/maps/place/'+str(result['latitude'])},{str(result['longitude'])} ({str(result['latitude'])},{str(result['longitude'])})")
 
     else:
-        print(colorama.Fore.WHITE + "[IP Scan]: " + colorama.Fore.RED + "IP address is incorrect.")
+        print(colorama.Fore.GREEN + "[IP Scan]: " + colorama.Fore.RED + "IP address is incorrect.")
